@@ -31,7 +31,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-block px-4 py-2 rounded-full border border-white/40 text-white font-bold text-xs md:text-sm tracking-widest uppercase mb-6 shadow-sm transform -rotate-2 bg-white/10 backdrop-blur-md">
+            <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/40 text-white font-bold text-[10px] sm:text-xs md:text-sm tracking-widest uppercase mb-4 sm:mb-6 shadow-sm transform -rotate-2 bg-white/10 backdrop-blur-md">
               EST. 2024 • TAMIL NADU'S FINEST
             </div>
           </motion.div>
@@ -40,10 +40,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl sm:text-7xl lg:text-[7rem] xl:text-[8rem] font-serif font-bold leading-[0.95] text-white tracking-tight mb-8 drop-shadow-lg"
+            className="text-5xl sm:text-7xl lg:text-[7rem] xl:text-[8rem] font-serif font-bold leading-[1.1] sm:leading-[0.95] text-white tracking-tight mb-6 sm:mb-8 drop-shadow-lg"
           >
             நம்ம <br />
-            <span className="italic font-light text-primary-green ml-8 lg:ml-24 block">மண்.</span>
+            <span className="italic font-light text-primary-green ml-4 sm:ml-8 lg:ml-24 block">மண்.</span>
             நம்ம இயற்கை.
           </motion.h1>
 
@@ -51,7 +51,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-200 max-w-lg mb-10 pl-4 lg:pl-12 border-l-4 border-neon-green drop-shadow-md"
+            className="text-base sm:text-lg md:text-xl text-gray-200 max-w-xs sm:max-w-lg mb-8 sm:mb-10 pl-4 lg:pl-12 border-l-4 border-neon-green drop-shadow-md"
           >
             Cultivated with love in the fertile soils of Tamil Nadu. Discover wildly beautiful, farm-fresh plants nurtured for your unique spaces.
           </motion.p>
@@ -60,17 +60,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-4 pl-4 lg:pl-12"
+            className="flex flex-col sm:flex-row flex-wrap gap-4 pl-0 sm:pl-4 lg:pl-12 w-full sm:w-auto"
           >
             <Link 
               to="/plants"
-              className="bg-primary-green hover:bg-neon-green text-white font-bold px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+              className="bg-primary-green hover:bg-neon-green text-white font-bold px-6 py-3 sm:px-8 sm:py-4 rounded-full flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base"
             >
               Explore Catalog <ArrowRight size={20} />
             </Link>
             <Link 
               to="/about"
-              className="bg-white/10 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-forest font-bold px-8 py-4 rounded-full transition-all"
+              className="bg-white/10 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-forest font-bold px-6 py-3 sm:px-8 sm:py-4 rounded-full flex justify-center transition-all w-full sm:w-auto text-sm sm:text-base"
             >
               Our Story
             </Link>
