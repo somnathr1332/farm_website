@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X, Leaf, ShoppingBag, Globe } from "lucide-react";
 import { siteConfig } from "../config/site";
 import { cn } from "../lib/utils";
 import WhatsAppIcon from "./WhatsAppIcon";
 import ThemeToggle from "./ThemeToggle";
+import { useLanguage } from "../context/LanguageContext";
+import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { t, language, toggleLanguage } = useLanguage();
+  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,10 +28,11 @@ export default function Navbar() {
   }, [location]);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Plants", path: "/plants" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: t('home'), path: "/" },
+    { name: t('plants'), path: "/plants" },
+    { name: t('about'), path: "/about" },
+    { name: t('contact'), path: "/contact" },
+    { name: t('guides'), path: "/guides" },
   ];
 
   return (
@@ -73,20 +78,43 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <ThemeToggle isScrolled={isScrolled} />
-            <a
-              href={siteConfig.socials.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-primary-green text-white px-5 py-2.5 rounded-lg font-medium transition-all transform hover:scale-105 hover:bg-forest shadow-md hover:shadow-xl text-sm"
+            <button
+              onClick={toggleLanguage}
+              className={cn(
+                "flex items-center gap-1 font-bold text-sm px-2 py-1 rounded-md transition-colors",
+                isScrolled ? "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" : "text-white hover:bg-white/10"
+              )}
             >
-              <WhatsAppIcon size={18} />
-              <span>Enquire</span>
-            </a>
+              <Globe size={16} />
+              {language === 'en' ? 'EN' : 'தமிழ்'}
+            </button>
+            <ThemeToggle isScrolled={isScrolled} />
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-primary-green transition-colors"
+            >
+              <ShoppingBag size={24} className={cn(!isScrolled && "text-white hover:text-gray-200")} />
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-primary-green transition-colors"
+            >
+              <ShoppingBag size={24} className={cn(!isScrolled && "text-white hover:text-gray-200")} />
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <ThemeToggle isScrolled={isScrolled} />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -120,14 +148,21 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center gap-2 w-full text-center mt-2 px-4 py-3 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-bold transition-colors"
+            >
+              <Globe size={20} />
+              Switch to {language === 'en' ? 'தமிழ்' : 'English'}
+            </button>
             <a
               href={siteConfig.socials.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full text-center mt-4 px-4 py-4 rounded-2xl bg-primary-green text-white font-bold shadow-md hover:bg-forest transition-colors"
+              className="flex items-center justify-center gap-2 w-full text-center mt-2 px-4 py-4 rounded-2xl bg-primary-green text-white font-bold shadow-md hover:bg-forest transition-colors"
             >
               <WhatsAppIcon size={20} />
-              Enquire on WhatsApp
+              {t('contactUs')} on WhatsApp
             </a>
           </div>
         </div>

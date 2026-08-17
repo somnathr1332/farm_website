@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/site";
 import { motion } from "framer-motion";
-import WhatsAppIcon from "./WhatsAppIcon";
+import { ShoppingBag } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function PlantCard({ plant }) {
-  const defaultMessage = `Hello, I am interested in the ${plant.name} plant. Please share more details.`;
-  const encodedMessage = encodeURIComponent(defaultMessage);
-  
-  const waLink = siteConfig.socials.whatsapp.includes("?") 
-    ? `${siteConfig.socials.whatsapp}&text=${encodedMessage}`
-    : `${siteConfig.socials.whatsapp}?text=${encodedMessage}`;
-
+  const { addToCart } = useCart();
+  const { t } = useLanguage();
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -40,19 +37,23 @@ export default function PlantCard({ plant }) {
         <div className="flex items-center justify-between mt-auto">
           <Link 
             to={`/plants/${plant.id}`}
-            className="text-forest dark:text-gray-200 font-bold text-sm uppercase tracking-wider hover:text-primary-green dark:hover:text-primary-green transition-colors border-b-2 border-transparent hover:border-primary-green pb-1"
+            className="text-forest dark:text-gray-200 font-bold text-sm uppercase tracking-wider hover:text-primary-green transition-colors border-b-2 border-transparent hover:border-primary-green pb-1"
           >
-            Explore
+            {t('viewDetails')}
           </Link>
-          <a 
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 bg-primary-green hover:bg-forest text-white rounded-full flex items-center justify-center transition-all shadow-md hover:shadow-xl transform hover:scale-110"
-            aria-label={`Enquire about ${plant.name} on WhatsApp`}
-          >
-            <WhatsAppIcon size={22} />
-          </a>
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-gray-900 dark:text-white mr-2">
+              {t('priceRs')} {plant.price}
+            </span>
+            <button 
+              onClick={() => addToCart(plant)}
+              className="px-4 py-2 bg-primary-green hover:bg-forest text-white rounded-lg flex items-center gap-2 transition-all shadow-md hover:shadow-xl text-sm font-bold"
+              aria-label={`Add ${plant.name} to cart`}
+            >
+              <ShoppingBag size={18} />
+              {t('addToCart')}
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>

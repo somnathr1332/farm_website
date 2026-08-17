@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { siteConfig } from "../config/site";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [formStatus, setFormStatus] = useState("idle");
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors duration-300"
           >
-            Get in Touch
+            {t('contact')}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -207,6 +209,30 @@ export default function Contact() {
             )}
           </motion.div>
         </div>
+
+        {/* Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-20 bg-white dark:bg-gray-800 rounded-3xl p-4 lg:p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors duration-300"
+        >
+          <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-6 pl-4 transition-colors duration-300">Find Us in Tamil Nadu</h2>
+          <div className="w-full h-[400px] rounded-2xl overflow-hidden">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125322.44173167158!2d76.90226463990664!3d11.012014522967664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Farm Location Map"
+            ></iframe>
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );

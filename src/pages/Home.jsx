@@ -6,6 +6,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import PlantCare from "../components/PlantCare";
 import Gallery from "../components/Gallery";
 import TestimonialsSection from "../components/TestimonialsSection";
+import FAQ from "../components/FAQ";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <WhyChooseUs />
       <PlantCare />
       <Gallery />
+      <FAQ />
       <TestimonialsSection />
     </div>
   );

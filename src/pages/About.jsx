@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Target, Leaf, Heart } from "lucide-react";
 import Gallery from "../components/Gallery";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -18,7 +20,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-serif font-bold text-gray-900 dark:text-white mb-6 tracking-tight transition-colors duration-300"
           >
-            Our Story
+            {t('aboutTitle')}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -26,7 +28,7 @@ export default function About() {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300"
           >
-            Cultivating nature with love, patience, and dedication since our very first seed was planted.
+            {t('aboutP1')} <br/><br/> {t('aboutP2')}
           </motion.p>
         </div>
 

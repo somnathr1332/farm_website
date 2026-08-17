@@ -5,6 +5,7 @@ import Plants from "./pages/Plants";
 import PlantDetails from "./pages/PlantDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import CareGuides from "./pages/CareGuides";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="plants/:id" element={<PlantDetails />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="guides" element={<CareGuides />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
