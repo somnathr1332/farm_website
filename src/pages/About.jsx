@@ -37,7 +37,7 @@ export default function About() {
           className="relative h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
         >
           <img 
-            src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?w=1200&q=80" 
+            src={`${import.meta.env.BASE_URL}images/about_farm_1786994707913.png`}
             alt="Farm aerial view" 
             className="w-full h-full object-cover"
           />

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 export default function CategorySection() {
   const categories = [
-    { name: "Herbal Plants", image: "https://images.unsplash.com/photo-1594955355444-f86a9f5d3419?w=800&q=80", param: "Herbal", span: "md:col-span-2 md:row-span-2" },
+    { name: "Herbal Plants", image: `${import.meta.env.BASE_URL}images/categories/category_herbal_1786994690038.png`, param: "Herbal", span: "md:col-span-2 md:row-span-2" },
     { name: "Ornamental Plants", image: "https://images.unsplash.com/photo-1548845924-118bd4d96c15?w=600&q=80", param: "Ornamental", span: "md:col-span-1 md:row-span-1" },
-    { name: "Indoor Plants", image: "https://images.unsplash.com/photo-1593482892290-f54927ae2b7e?w=600&q=80", param: "Indoor", span: "md:col-span-1 md:row-span-2" },
+    { name: "Indoor Plants", image: `${import.meta.env.BASE_URL}images/categories/category_indoor_1786994467872.png`, param: "Indoor", span: "md:col-span-1 md:row-span-2" },
     { name: "Mini Plants", image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&q=80", param: "Mini Plants", span: "md:col-span-1 md:row-span-1" },
     { name: "Fruit Plants", image: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=800&q=80", param: "Fruit Plants", span: "md:col-span-2 md:row-span-1" },
-    { name: "Outdoor Plants", image: "https://images.unsplash.com/photo-1674483785640-57140e4e7e6f?w=600&q=80", param: "Outdoor", span: "md:col-span-1 md:row-span-1" },
+    { name: "Outdoor Plants", image: `${import.meta.env.BASE_URL}images/categories/category_outdoor_1786994675376.png`, param: "Outdoor", span: "md:col-span-1 md:row-span-1" },
   ];
 
   return (

@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 
 export default function Gallery() {
   const images = [
-    "https://images.unsplash.com/photo-1585320806297-9794b3e4ce30?w=600&q=80",
-    "https://images.unsplash.com/photo-1416879598555-220b852d2f10?w=600&q=80",
-    "https://images.unsplash.com/photo-1596547610488-827ce7a0d4c7?w=600&q=80",
-    "https://images.unsplash.com/photo-1620127807580-1a1362095cc1?w=600&q=80",
-    "https://images.unsplash.com/photo-1582739243761-9e77695a70fb?w=600&q=80",
-    "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&q=80"
+    `${import.meta.env.BASE_URL}images/gallery/gallery_1_1786994735188.png`,
+    `${import.meta.env.BASE_URL}images/gallery/gallery_2_1786994750093.png`,
+    `${import.meta.env.BASE_URL}images/gallery/gallery_3_1786994761404.png`,
+    `${import.meta.env.BASE_URL}images/gallery/gallery_4_1786994882155.png`,
+    `${import.meta.env.BASE_URL}images/gallery/gallery_5_1786994909421.png`,
+    `${import.meta.env.BASE_URL}images/gallery/gallery_6_1786994920390.png`
   ];
 
   return (
