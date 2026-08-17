@@ -15,7 +15,7 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover"
           poster="https://images.unsplash.com/photo-1596547610488-827ce7a0d4c7?w=1600&q=80"
         >
-          <source src="/Farmwebsite.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}Farmwebsite.mp4`} type="video/mp4" />
         </video>
         {/* Gradient overlay to ensure text readability on the left while keeping the video clear on the right */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent dark:from-black/90 dark:via-black/60 dark:to-transparent pointer-events-none transition-colors duration-300" />
