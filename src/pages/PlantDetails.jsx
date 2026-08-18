@@ -5,6 +5,7 @@ import WhatsAppIcon from "../components/WhatsAppIcon";
 import { plants } from "../data/plants";
 import { siteConfig } from "../config/site";
 import { motion } from "framer-motion";
+import SEOHead from "../components/SEOHead";
 
 export default function PlantDetails() {
   const { id } = useParams();
@@ -32,6 +33,11 @@ export default function PlantDetails() {
 
   return (
     <div className="pt-28 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
+      <SEOHead
+        title={`Buy ${plant.name} Plant Online | GreenLeaf Farms Sembanarkoil, Mayiladuthurai`}
+        description={`Buy ${plant.name} (${plant.category}) from GreenLeaf Farms in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. ${plant.description.substring(0, 120)}...`}
+        canonicalPath={`/plants/${plant.id}`}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <Link to="/plants" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-green dark:text-gray-400 dark:hover:text-primary-green transition-colors mb-8 font-medium">
@@ -44,7 +50,7 @@ export default function PlantDetails() {
           <div className="lg:w-1/2 relative bg-gray-50 dark:bg-gray-800 h-[400px] lg:h-auto transition-colors duration-300">
             <img 
               src={plant.image} 
-              alt={plant.name} 
+              alt={`${plant.name} plant - Buy online from GreenLeaf Farms Sembanarkoil`} 
               className="w-full h-full object-cover"
             />
           </div>

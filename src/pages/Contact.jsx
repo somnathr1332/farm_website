@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { siteConfig } from "../config/site";
 import { useLanguage } from "../context/LanguageContext";
+import SEOHead from "../components/SEOHead";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -29,6 +30,11 @@ export default function Contact() {
 
   return (
     <div className="pt-24 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
+      <SEOHead
+        title="Contact GreenLeaf Farms | Plant Nursery Sembanarkoil, Tamil Nadu 609309"
+        description="Contact GreenLeaf Farms plant nursery in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. Call +91 93602 93815, visit our farm, or send us a message. Open Mon-Sat 9AM-6PM."
+        canonicalPath="/contact"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -218,17 +224,17 @@ export default function Contact() {
           transition={{ delay: 0.4 }}
           className="mt-20 bg-white dark:bg-gray-800 rounded-3xl p-4 lg:p-6 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors duration-300"
         >
-          <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-6 pl-4 transition-colors duration-300">Find Us in Tamil Nadu</h2>
+          <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-6 pl-4 transition-colors duration-300">Find Us in Sembanarkoil, Mayiladuthurai</h2>
           <div className="w-full h-[400px] rounded-2xl overflow-hidden">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125322.44173167158!2d76.90226463990664!3d11.012014522967664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31275.042893645!2d79.6100!3d11.0468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a553e1f2e5b5b1b%3A0x4e0f7a1c2b3d4e5f!2sSembanarkoil%2C%20Tamil%20Nadu%20609309!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Farm Location Map"
+              title="GreenLeaf Farms Location - Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309"
             ></iframe>
           </div>
         </motion.div>

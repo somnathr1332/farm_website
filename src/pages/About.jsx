@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Target, Leaf, Heart } from "lucide-react";
 import Gallery from "../components/Gallery";
 import { useLanguage } from "../context/LanguageContext";
+import SEOHead from "../components/SEOHead";
 
 export default function About() {
   const { t } = useLanguage();
@@ -12,6 +13,11 @@ export default function About() {
 
   return (
     <div className="pt-24 pb-0 bg-white dark:bg-gray-950 transition-colors duration-300">
+      <SEOHead
+        title="About GreenLeaf Farms | Plant Nursery in Sembanarkoil, Mayiladuthurai"
+        description="Learn about GreenLeaf Farms — a trusted plant nursery in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. We grow eco-friendly indoor, outdoor & herbal plants using sustainable organic farming methods."
+        canonicalPath="/about"
+      />
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -40,7 +46,7 @@ export default function About() {
         >
           <img 
             src={`${import.meta.env.BASE_URL}images/about_farm_1786994707913.png`}
-            alt="Farm aerial view" 
+            alt="GreenLeaf Farms nursery aerial view in Sembanarkoil, Mayiladuthurai, Tamil Nadu" 
             className="w-full h-full object-cover"
           />
         </motion.div>

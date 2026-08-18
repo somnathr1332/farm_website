@@ -1,0 +1,21 @@
+{
+  "name": "GreenLeaf Farms — Buy Plants Online in Sembanarkoil, Mayiladuthurai",
+  "short_name": "GreenLeaf Farms",
+  "description": "Best plant nursery in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. Buy fresh indoor, outdoor, herbal, ornamental & fruit plants online.",
+  "start_url": "/farm_website/",
+  "scope": "/farm_website/",
+  "display": "standalone",
+  "background_color": "#F0FFF0",
+  "theme_color": "#1B5E20",
+  "orientation": "portrait-primary",
+  "categories": ["shopping", "lifestyle", "education"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/farm_website/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
