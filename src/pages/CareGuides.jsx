@@ -4,6 +4,7 @@ import { Leaf, Calendar } from "lucide-react";
 import { guides } from "../data/guides";
 import { useLanguage } from "../context/LanguageContext";
 import SEOHead from "../components/SEOHead";
+import { seoConfig } from "../config/seokeywords";
 
 export default function CareGuides() {
   const { t, language } = useLanguage();
@@ -15,9 +16,9 @@ export default function CareGuides() {
   return (
     <div className="pt-24 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <SEOHead
-        title="Plant Care Guides | GreenLeaf Farms Sembanarkoil, Tamil Nadu"
-        description="Expert plant care guides and tips for Tamil Nadu climate. Learn how to care for indoor, outdoor, herbal & ornamental plants from GreenLeaf Farms in Sembanarkoil, Mayiladuthurai 609309."
-        canonicalPath="/guides"
+        title={seoConfig.pages.guides.title}
+        description={seoConfig.pages.guides.description}
+        canonicalPath={seoConfig.pages.guides.canonicalPath}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Leaf } from "lucide-react";
 import SEOHead from "../components/SEOHead";
+import { seoConfig } from "../config/seokeywords";
 
 export default function NotFound() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center bg-background-color dark:bg-gray-950 px-4 transition-colors duration-300">
       <SEOHead
-        title="Page Not Found | GreenLeaf Farms"
-        description="The page you are looking for doesn't exist. Visit GreenLeaf Farms to browse our plant collection in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309."
+        title={seoConfig.pages.notFound.title}
+        description={seoConfig.pages.notFound.description}
       />
       <div className="text-center">
         <div className="w-24 h-24 bg-sage/20 dark:bg-emerald-900/20 rounded-full flex items-center justify-center mx-auto mb-8 transition-colors duration-300">

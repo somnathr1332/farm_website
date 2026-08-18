@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { seoConfig } from "../config/seokeywords";
 
 /**
  * SEOHead — Dynamically sets the document title and meta tags per page.
@@ -9,6 +10,8 @@ import { useEffect } from "react";
  */
 export default function SEOHead({ title, description, canonicalPath = "" }) {
   useEffect(() => {
+    const baseUrl = seoConfig.siteUrl;
+
     // Set document title
     document.title = title;
 
@@ -19,7 +22,6 @@ export default function SEOHead({ title, description, canonicalPath = "" }) {
     }
 
     // Update canonical URL
-    const baseUrl = "https://somnathr1332.github.io/farm_website";
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) {
       canonicalLink.setAttribute("href", `${baseUrl}${canonicalPath}`);
@@ -41,6 +43,14 @@ export default function SEOHead({ title, description, canonicalPath = "" }) {
 
     const twDescription = document.querySelector('meta[name="twitter:description"]');
     if (twDescription) twDescription.setAttribute("content", description);
+
+    // Update Google Search Console verification tag
+    if (seoConfig.googleVerificationId) {
+      let googleVerification = document.querySelector('meta[name="google-site-verification"]');
+      if (googleVerification) {
+        googleVerification.setAttribute("content", seoConfig.googleVerificationId);
+      }
+    }
 
   }, [title, description, canonicalPath]);
 

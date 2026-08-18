@@ -5,6 +5,7 @@ import PlantCard from "../components/PlantCard";
 import { plants } from "../data/plants";
 import { motion, AnimatePresence } from "framer-motion";
 import SEOHead from "../components/SEOHead";
+import { seoConfig } from "../config/seokeywords";
 
 export default function Plants() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -48,9 +49,9 @@ export default function Plants() {
   return (
     <div className="pt-24 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <SEOHead
-        title="Buy Indoor, Outdoor & Herbal Plants | GreenLeaf Farms Sembanarkoil"
-        description="Browse and buy farm-fresh indoor, outdoor, herbal, ornamental, fruit & mini plants online from GreenLeaf Farms in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. Wide collection with delivery available."
-        canonicalPath="/plants"
+        title={seoConfig.pages.plants.title}
+        description={seoConfig.pages.plants.description}
+        canonicalPath={seoConfig.pages.plants.canonicalPath}
       />
       {/* Header */}
       <div className="bg-forest dark:bg-gray-900 text-white py-16 mb-12 transition-colors duration-300">

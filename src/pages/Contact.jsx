@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { siteConfig } from "../config/site";
 import { useLanguage } from "../context/LanguageContext";
 import SEOHead from "../components/SEOHead";
+import { seoConfig } from "../config/seokeywords";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -31,9 +32,9 @@ export default function Contact() {
   return (
     <div className="pt-24 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <SEOHead
-        title="Contact GreenLeaf Farms | Plant Nursery Sembanarkoil, Tamil Nadu 609309"
-        description="Contact GreenLeaf Farms plant nursery in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. Call +91 93602 93815, visit our farm, or send us a message. Open Mon-Sat 9AM-6PM."
-        canonicalPath="/contact"
+        title={seoConfig.pages.contact.title}
+        description={seoConfig.pages.contact.description}
+        canonicalPath={seoConfig.pages.contact.canonicalPath}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
