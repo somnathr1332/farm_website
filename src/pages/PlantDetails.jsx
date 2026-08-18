@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, Sun, Droplets, MapPin, Ruler, AlertCircle } from "lucide-react";
+import { ArrowLeft, Check, Sun, Droplets, MapPin, Ruler, AlertCircle, ShoppingCart, CheckCircle, Minus, Plus } from "lucide-react";
 import WhatsAppIcon from "../components/WhatsAppIcon";
 import { plants } from "../data/plants";
 import { siteConfig } from "../config/site";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import SEOHead from "../components/SEOHead";
+import { useCart } from "../context/CartContext";
 
 export default function PlantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [plant, setPlant] = useState(null);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart, cartItems } = useCart();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,19 +71,94 @@ export default function PlantDetails() {
               {plant.name}
             </h1>
 
+            {/* Price */}
+            <div className="flex items-baseline gap-3 mb-4">
+              <span className="text-3xl font-bold text-primary-green">₹{plant.price}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">per plant</span>
+            </div>
+
             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8 transition-colors duration-300">
               {plant.description}
             </p>
 
-            <a 
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-green text-white hover:bg-dark-green rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 mb-10"
-            >
-              <WhatsAppIcon size={22} />
-              Enquire About This Plant
-            </a>
+            {/* Quantity Selector */}
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Quantity:</span>
+              <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                >
+                  <Minus size={16} className="text-gray-600 dark:text-gray-300" />
+                </button>
+                <span className="px-5 py-2 text-lg font-bold text-gray-900 dark:text-white min-w-[3rem] text-center">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity(prev => prev + 1)}
+                  className="p-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                >
+                  <Plus size={16} className="text-gray-600 dark:text-gray-300" />
+                </button>
+              </div>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                Total: <span className="font-bold text-gray-900 dark:text-white">₹{plant.price * quantity}</span>
+              </span>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-10">
+              {/* Add to Cart Button */}
+              <button
+                onClick={() => {
+                  for (let i = 0; i < quantity; i++) {
+                    addToCart(plant);
+                  }
+                  setAddedToCart(true);
+                  setTimeout(() => setAddedToCart(false), 2500);
+                }}
+                className={`flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 ${
+                  addedToCart 
+                    ? "bg-emerald-500 text-white" 
+                    : "bg-primary-green text-white hover:bg-dark-green"
+                }`}
+              >
+                <AnimatePresence mode="wait">
+                  {addedToCart ? (
+                    <motion.span
+                      key="added"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <CheckCircle size={22} /> Added to Cart!
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="add"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <ShoppingCart size={22} /> Add to Cart
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+
+              {/* WhatsApp Enquiry */}
+              <a 
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#25D366] text-white hover:bg-[#1da851] rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1"
+              >
+                <WhatsAppIcon size={22} />
+                Enquire on WhatsApp
+              </a>
+            </div>
 
             <div className="border-t border-gray-100 dark:border-gray-800 pt-8 transition-colors duration-300">
               <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-6 transition-colors duration-300">Care & Details</h3>
