@@ -17,17 +17,19 @@ export default function PlantCard({ plant }) {
       className="bg-white dark:bg-gray-800 rounded-[2.5rem] rounded-tr-[1rem] overflow-hidden shadow-xl hover:shadow-[0_20px_50px_-15px_rgba(16,185,129,0.4)] dark:hover:shadow-[0_20px_50px_-15px_rgba(16,185,129,0.2)] transition-all duration-500 group flex flex-col h-full transform hover:-translate-y-3"
     >
       {/* Image container */}
-      <div className="relative h-72 overflow-hidden m-2 rounded-[2rem] rounded-tr-lg bg-gray-100 dark:bg-gray-900">
-        <img 
-          src={plant.image} 
-          alt={plant.name} 
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
-          loading="lazy"
-        />
-        <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-forest dark:text-gray-100 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full shadow-sm transition-colors duration-300">
-          {plant.category}
+      <Link to={`/plants/${plant.id}`} className="block">
+        <div className="relative h-72 overflow-hidden m-2 rounded-[2rem] rounded-tr-lg bg-gray-100 dark:bg-gray-900">
+          <img 
+            src={plant.image} 
+            alt={plant.name} 
+            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+            loading="lazy"
+          />
+          <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-forest dark:text-gray-100 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full shadow-sm transition-colors duration-300">
+            {plant.category}
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
