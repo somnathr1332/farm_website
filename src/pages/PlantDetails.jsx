@@ -36,22 +36,22 @@ export default function PlantDetails() {
     : `${siteConfig.socials.whatsapp}?text=${encodedMessage}`;
 
   return (
-    <div className="pt-28 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
+    <div className="pt-24 pb-16 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <SEOHead
         title={`Buy ${plant.name} Plant Online | GreenLeaf Farms Sembanarkoil, Mayiladuthurai`}
         description={`Buy ${plant.name} (${plant.category}) from GreenLeaf Farms in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. ${plant.description.substring(0, 120)}...`}
         canonicalPath={`/plants/${plant.id}`}
       />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <Link to="/plants" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-green dark:text-gray-400 dark:hover:text-primary-green transition-colors mb-6 font-medium">
-          <ArrowLeft size={20} /> Back to Catalog
+        <Link to="/plants" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-green dark:text-gray-400 dark:hover:text-primary-green transition-colors mb-5 font-medium">
+          <ArrowLeft size={18} /> Back to Catalog
         </Link>
 
         <div className="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col lg:flex-row transition-colors duration-300">
           
           {/* Plant Image */}
-          <div className="lg:w-[45%] relative bg-gray-50 dark:bg-gray-800 h-[320px] lg:h-auto min-h-[350px] transition-colors duration-300">
+          <div className="lg:w-[40%] relative bg-gray-50 dark:bg-gray-800 h-[280px] lg:h-auto min-h-[300px] transition-colors duration-300">
             <img 
               src={plant.image} 
               alt={`${plant.name} plant - Buy online from GreenLeaf Farms Sembanarkoil`} 
@@ -60,20 +60,20 @@ export default function PlantDetails() {
           </div>
 
           {/* Plant Info */}
-          <div className="lg:w-[55%] p-6 lg:p-8">
+          <div className="lg:w-[60%] p-5 lg:p-6">
             <div className="flex items-center gap-3 mb-2">
               <span className="bg-light-green dark:bg-emerald-900/30 text-primary-green dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-colors duration-300">
                 {plant.category}
               </span>
             </div>
 
-            <h1 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors duration-300">
+            <h1 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900 dark:text-white mb-3 tracking-tight transition-colors duration-300">
               {plant.name}
             </h1>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3 mb-4">
-              <span className="text-3xl font-bold text-primary-green">₹{plant.price}</span>
+            <div className="flex items-baseline gap-2 mb-3">
+              <span className="text-2xl font-bold text-primary-green">₹{plant.price}</span>
               <span className="text-sm text-gray-500 dark:text-gray-400">per plant</span>
             </div>
 
