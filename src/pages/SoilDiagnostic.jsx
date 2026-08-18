@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Gauge, Droplet, Sun, Sprout, Leaf, ArrowRight, RefreshCw } from "lucide-react";
+import { Gauge, Droplet, Sun, Sprout, Leaf, ArrowRight, RefreshCw, MapPin } from "lucide-react";
 import { plants } from "../data/plants";
 import PlantCard from "../components/PlantCard";
 import SEOHead from "../components/SEOHead";
@@ -8,9 +8,64 @@ import { useLanguage } from "../context/LanguageContext";
 
 export default function SoilDiagnostic() {
   const { language } = useLanguage();
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedSoil, setSelectedSoil] = useState("");
   const [selectedClimate, setSelectedClimate] = useState("");
   const [report, setReport] = useState(null);
+
+  // Tamil Nadu Districts Data
+  const districts = [
+    {
+      id: "coimbatore",
+      name: { en: "Coimbatore", ta: "கோயம்புத்தூர்" },
+      soil: "Red",
+      climate: "Dry",
+      info: {
+        en: "Coimbatore lies in the rain-shadow region of the Western Ghats. It has predominantly iron-rich Red Soil and dry, hot semi-arid climate.",
+        ta: "கோயம்புத்தூர் மேற்குத் தொடர்ச்சி மலையின் மழைமறைவுப் பிரதேசத்தில் அமைந்துள்ளது. இங்கு இரும்புச்சத்து நிறைந்த செம்மண் மற்றும் வறண்ட வெப்ப காலநிலை உள்ளது."
+      }
+    },
+    {
+      id: "thanjavur",
+      name: { en: "Thanjavur (Delta Region)", ta: "தஞ்சாவூர் (டெல்டா)" },
+      soil: "Loamy",
+      climate: "Humid",
+      info: {
+        en: "The Rice Bowl of Tamil Nadu. Located in the Cauvery Delta, it features highly fertile alluvial Loamy Soil and humid tropical climate.",
+        ta: "தமிழ்நாட்டின் நெற்களஞ்சியம். காவிரி டெல்டா பகுதியில் அமைந்துள்ளதால், இங்கு அதிக வளமான வண்டல் மண் மற்றும் ஈரப்பதமான காலநிலை உள்ளது."
+      }
+    },
+    {
+      id: "nilgiris",
+      name: { en: "The Nilgiris (Hill Station)", ta: "நீலகிரி (மலைப்பிரதேசம்)" },
+      soil: "Red",
+      climate: "Cool",
+      info: {
+        en: "A hilly district situated in the Western Ghats. Features acidic laterite/Red Soil and a cool, pleasant climate with high rainfall.",
+        ta: "மேற்குத் தொடர்ச்சி மலையில் அமைந்துள்ள மலைப்பிரதேசம். இங்கு அமிலத்தன்மை கொண்ட செம்மண் மற்றும் குளிர்ந்த காலநிலை உள்ளது."
+      }
+    },
+    {
+      id: "chennai",
+      name: { en: "Chennai & Coastal Coast", ta: "சென்னை மற்றும் கடலோர பகுதி" },
+      soil: "Sandy",
+      climate: "Humid",
+      info: {
+        en: "Coastal capital region with sandy alluvium soil and a hot, humid marine climate with salty breezes.",
+        ta: "கடலோர தலைநகர பகுதி. இங்கு மணல் கலந்த மண் மற்றும் உப்பு காற்றுடன் கூடிய வெப்பமும் ஈரப்பதமும் நிறைந்த காலநிலை உள்ளது."
+      }
+    },
+    {
+      id: "madurai",
+      name: { en: "Madurai & South Drylands", ta: "மதுரை மற்றும் தென் மாவட்டங்கள்" },
+      soil: "Red",
+      climate: "Dry",
+      info: {
+        en: "An ancient dry-land region in southern Tamil Nadu. Predominantly red sandy gravelly soil with high temperatures.",
+        ta: "தென் தமிழ்நாட்டின் பழமையான வறண்ட நிலப்பகுதி. இங்கு பெரும்பாலும் செம்மண் மற்றும் அதிக வெப்பம் நிலவுகிறது."
+      }
+    }
+  ];
 
   // Soil details (EN & TA)
   const soils = [
@@ -72,7 +127,7 @@ export default function SoilDiagnostic() {
       },
       challenges: {
         en: "Easily waterlogged, compaction prevents root aeration, hardens like brick when dry.",
-        ta: "நீர் எளிதில் தேங்கிவிடும், மண் இறுகுவதால் வேர்களுக்கு காற்றோட்டம் கிடைக்காது, காய்ந்தால் பாறை போல் கடினமாகும்.",
+        ta: "நீர் எளிதில் தேங்கிவிடும், மண் இறுகுதால் வேர்களுக்கு காற்றோட்டம் கிடைக்காது, காய்ந்தால் பாறை போல் கடினமாகும்.",
       },
       enrichment: {
         en: "Mix in 30% organic coco peat or coir pith to loosen structure. Add aged vermicompost and river sand to improve drainage channels.",
@@ -126,61 +181,71 @@ export default function SoilDiagnostic() {
     },
   };
 
+  const handleDistrictChange = (distId) => {
+    setSelectedDistrict(distId);
+    if (!distId) {
+      setSelectedSoil("");
+      setSelectedClimate("");
+      return;
+    }
+    const dist = districts.find(d => d.id === distId);
+    setSelectedSoil(dist.soil);
+    setSelectedClimate(dist.climate);
+  };
+
   const handleDiagnose = () => {
-    if (!selectedSoil || !selectedClimate) return;
+    const soilType = selectedSoil;
+    const climateType = selectedClimate;
+    if (!soilType || !climateType) return;
 
     // Filter plants that match selected criteria
     const matched = plants.filter((plant) => {
-      // 1. Soil matching rules
       let soilMatch = false;
       const category = plant.category.toLowerCase();
       const loc = plant.location.toLowerCase();
 
-      if (selectedSoil === "Clay") {
-        // Clay soil holds water -> good for moisture loving outdoor trees, indoor plants
+      if (soilType === "Clay") {
         soilMatch = loc.includes("indoor") || category.includes("fruit") || plant.water.toLowerCase().includes("regular") || plant.water.toLowerCase().includes("moist");
-      } else if (selectedSoil === "Sandy") {
-        // Sandy soil drains fast -> perfect for low-water plants, succulents, herbs
+      } else if (soilType === "Sandy") {
         soilMatch = plant.water.toLowerCase().includes("low") || category.includes("mini") || category.includes("herbal");
-      } else if (selectedSoil === "Loamy") {
-        // Loamy soil fits almost all plants
+      } else if (soilType === "Loamy") {
         soilMatch = true;
-      } else if (selectedSoil === "Red") {
-        // Red soil matches herbal plants and garden ornamentals
+      } else if (soilType === "Red") {
         soilMatch = category.includes("herbal") || category.includes("ornamental") || category.includes("fruit");
       }
 
-      // 2. Climate matching rules
       let climateMatch = false;
       const sun = plant.sunlight.toLowerCase();
 
-      if (selectedClimate === "Dry") {
-        // Dry/Hot -> full sun, drought tolerant
+      if (climateType === "Dry") {
         climateMatch = sun.includes("full") || plant.care.toLowerCase().includes("neglect") || plant.care.toLowerCase().includes("drought");
-      } else if (selectedClimate === "Humid") {
-        // Humid -> partial shade, indoor, high moisture
+      } else if (climateType === "Humid") {
         climateMatch = sun.includes("indirect") || loc.includes("indoor") || plant.water.toLowerCase().includes("high") || plant.water.toLowerCase().includes("moist");
-      } else if (selectedClimate === "Cool") {
-        // Cool -> low light, partial shade, regular watering
+      } else if (climateType === "Cool") {
         climateMatch = sun.includes("low") || sun.includes("partial") || category.includes("herbal");
       }
 
       return soilMatch && climateMatch;
     });
 
-    const info = diagnosticData[selectedSoil];
+    const info = diagnosticData[soilType];
+    const dist = districts.find(d => d.id === selectedDistrict);
+
     setReport({
-      soil: selectedSoil,
-      climate: selectedClimate,
+      soil: soilType,
+      climate: climateType,
       healthIndex: info.healthIndex,
       strengths: info.strengths[language],
       challenges: info.challenges[language],
       enrichment: info.enrichment[language],
-      matches: matched.slice(0, 4), // Top 4 matches
+      matches: matched.slice(0, 4),
+      districtInfo: dist ? dist.info[language] : null,
+      districtName: dist ? dist.name[language] : null,
     });
   };
 
   const resetTool = () => {
+    setSelectedDistrict("");
     setSelectedSoil("");
     setSelectedClimate("");
     setReport(null);
@@ -189,8 +254,8 @@ export default function SoilDiagnostic() {
   return (
     <div className="pt-24 pb-20 bg-background-color dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <SEOHead
-        title={language === "en" ? "Soil & Climate Advisor | Organic Crop Diagnostic" : "மண் ஆலோசகர் | இயற்கை விவசாய மண் பரிசோதனை"}
-        description={language === "en" ? "Interactive diagnostic tool to analyze your soil type and local climate, recommending organic fertilizers and compatible plants." : "உங்கள் மண் வகை மற்றும் காலநிலையை பரிசோதித்து, இயற்கை உரங்கள் மற்றும் ஏற்ற பயிர்களைப் பரிந்துரைக்கும் கருவி."}
+        title={language === "en" ? "Soil & Climate Advisor | District Soil Analyzer" : "மண் ஆலோசகர் | மாவட்ட மண் பரிசோதனை"}
+        description={language === "en" ? "Analyze your soil type and local climate by selecting your district in Tamil Nadu to receive organic farming matches." : "தமிழ்நாட்டின் மாவட்டத்தைத் தேர்ந்தெடுத்து மண் மற்றும் காலநிலையைப் பரிசோதிக்கும் கருவி."}
         canonicalPath="/diagnostic"
       />
 
@@ -201,12 +266,12 @@ export default function SoilDiagnostic() {
             {language === "en" ? "SOIL ADVISOR" : "மண் ஆலோசகர்"}
           </span>
           <h1 className="text-4xl sm:text-5xl font-serif font-bold text-forest dark:text-white mt-4 transition-colors">
-            {language === "en" ? "Soil & Climate Advisor" : "மண் மற்றும் காலநிலை பரிசோதனை"}
+            {language === "en" ? "District Soil & Climate Advisor" : "மாவட்ட மண் மற்றும் காலநிலை பரிசோதனை"}
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-xl mx-auto transition-colors text-sm sm:text-base">
             {language === "en"
-              ? "Analyze your garden soil quality and regional weather to receive customized bio-enrichment recipes and match the best crops."
-              : "உங்கள் தோட்டத்து மண் வளம் மற்றும் காலநிலையைப் பரிசோதித்து, பிரத்தியேக இயற்கை உரக் கரைசல்கள் மற்றும் உகந்த செடிகளின் பட்டியலை அமையுங்கள்."}
+              ? "Select your Tamil Nadu district to auto-fill its native soil type and climate properties, or manually configure your parameters below."
+              : "தமிழ்நாட்டின் மாவட்டத்தைத் தேர்ந்தெடுப்பதன் மூலம் தானியங்கியாக மண் வளம் மற்றும் காலநிலையை பரிசோதிக்கலாம், அல்லது கைமுறையாக தேர்வு செய்யலாம்."}
           </p>
         </div>
 
@@ -219,13 +284,38 @@ export default function SoilDiagnostic() {
               exit={{ opacity: 0, y: -20 }}
               className="space-y-10"
             >
+              {/* District Dropdown Selector */}
+              <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 shadow-lg transition-all text-center">
+                <label className="block text-sm font-bold text-forest dark:text-gray-200 mb-3 flex items-center justify-center gap-2">
+                  <MapPin className="text-primary-green" size={20} />
+                  {language === "en" ? "Select Your Tamil Nadu District" : "தமிழ்நாடு மாவட்டத்தைத் தேர்ந்தெடுக்கவும்"}
+                </label>
+                <select
+                  value={selectedDistrict}
+                  onChange={(e) => handleDistrictChange(e.target.value)}
+                  className="w-full bg-gray-50 dark:bg-gray-850 border border-gray-250 dark:border-gray-800 rounded-2xl p-4 text-sm font-bold text-gray-800 dark:text-gray-100 focus:outline-none focus:border-primary-green transition-all"
+                >
+                  <option value="">{language === "en" ? "-- Choose District --" : "-- மாவட்டத்தை தேர்வு செய் --"}</option>
+                  {districts.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name[language]}
+                    </option>
+                  ))}
+                </select>
+                {selectedDistrict && (
+                  <div className="mt-4 p-3 bg-forest/5 dark:bg-primary-green/10 rounded-2xl text-xs text-forest dark:text-primary-green font-semibold italic text-left">
+                    {districts.find(d => d.id === selectedDistrict).info[language]}
+                  </div>
+                )}
+              </div>
+
               {/* Grid selectors */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Soil Selector Card */}
                 <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 sm:p-8 shadow-xl transition-all">
                   <h3 className="text-xl font-bold text-forest dark:text-white mb-6 flex items-center gap-2">
                     <Leaf className="text-primary-green" size={22} />
-                    {language === "en" ? "1. Select Soil Type" : "1. மண் வகையைத் தேர்ந்தெடுக்கவும்"}
+                    {language === "en" ? "1. Soil Type" : "1. மண் வகை"}
                   </h3>
                   <div className="grid grid-cols-1 gap-3">
                     {soils.map((s) => {
@@ -233,7 +323,7 @@ export default function SoilDiagnostic() {
                       return (
                         <button
                           key={s.value}
-                          onClick={() => setSelectedSoil(s.value)}
+                          onClick={() => { setSelectedSoil(s.value); setSelectedDistrict(""); }}
                           className={`flex gap-4 p-4 rounded-2xl border text-left transition-all ${
                             isSel
                               ? "bg-forest/5 dark:bg-primary-green/10 border-primary-green shadow-md scale-[1.01]"
@@ -261,7 +351,7 @@ export default function SoilDiagnostic() {
                 <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-6 sm:p-8 shadow-xl transition-all">
                   <h3 className="text-xl font-bold text-forest dark:text-white mb-6 flex items-center gap-2">
                     <Sun className="text-orange-500" size={22} />
-                    {language === "en" ? "2. Select Climate / Region" : "2. காலநிலையைத் தேர்ந்தெடுக்கவும்"}
+                    {language === "en" ? "2. Climate / Region" : "2. காலநிலை / பகுதி"}
                   </h3>
                   <div className="grid grid-cols-1 gap-3">
                     {climates.map((c) => {
@@ -269,7 +359,7 @@ export default function SoilDiagnostic() {
                       return (
                         <button
                           key={c.value}
-                          onClick={() => setSelectedClimate(c.value)}
+                          onClick={() => { setSelectedClimate(c.value); setSelectedDistrict(""); }}
                           className={`flex gap-4 p-4 rounded-2xl border text-left transition-all ${
                             isSel
                               ? "bg-orange-500/5 dark:bg-orange-500/10 border-orange-500 shadow-md scale-[1.01]"
@@ -325,9 +415,15 @@ export default function SoilDiagnostic() {
                     {language === "en" ? "DIAGNOSTIC ADVISORY REPORT" : "பரிசோதனை அறிக்கை"}
                   </span>
                   <h2 className="text-3xl sm:text-4xl font-serif font-bold mt-2">
+                    {report.districtName ? `${report.districtName} - ` : ""}
                     {soils.find((s) => s.value === report.soil).name[language]} + {climates.find((c) => c.value === report.climate).name[language]}
                   </h2>
-                  <p className="text-gray-200 mt-2 text-sm sm:text-base max-w-xl">
+                  {report.districtInfo && (
+                    <p className="text-emerald-100 mt-3 text-xs sm:text-sm font-semibold italic bg-white/10 p-3 rounded-xl border border-white/10 max-w-xl">
+                      {report.districtInfo}
+                    </p>
+                  )}
+                  <p className="text-gray-200 mt-4 text-xs sm:text-sm max-w-xl">
                     {language === "en"
                       ? "Your customized soil-enrichment recipes and matched plants have been generated based on organic farming guidelines."
                       : "இயற்கை விவசாய வழிகாட்டுதலின்படி உங்களது பிரத்தியேக மண் மேம்பாட்டு முறைகளும் ஏற்ற பயிர்களும் தயாரிக்கப்பட்டுள்ளன."}
