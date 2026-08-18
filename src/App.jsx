@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import CareGuides from "./pages/CareGuides";
 import PlantingCalendar from "./pages/PlantingCalendar";
+import SoilDiagnostic from "./pages/SoilDiagnostic";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="guides" element={<CareGuides />} />
         <Route path="calendar" element={<PlantingCalendar />} />
+        <Route path="diagnostic" element={<SoilDiagnostic />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

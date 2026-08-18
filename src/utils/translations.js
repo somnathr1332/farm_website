@@ -8,6 +8,7 @@ export const translations = {
     guides: "Care Guides",
     quiz: "Plant Finder",
     calendar: "Planting Calendar",
+    diagnostic: "Soil Advisor",
 
     // Hero
     heroSubtitle: "EST. 2024 • TAMIL NADU'S FINEST",
@@ -75,6 +76,7 @@ export const translations = {
     guides: "வழிகாட்டிகள்",
     quiz: "செடி தேர்வு",
     calendar: "பயிரிடும் காலண்டர்",
+    diagnostic: "மண் பரிசோதனை",
 
     // Hero
     heroSubtitle: "EST. 2024 • தமிழ்நாட்டின் சிறந்தது",

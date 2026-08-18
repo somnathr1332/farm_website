@@ -34,6 +34,7 @@ export default function Navbar() {
     { name: t('contact'), path: "/contact" },
     { name: t('guides'), path: "/guides" },
     { name: t('calendar'), path: "/calendar" },
+    { name: t('diagnostic'), path: "/diagnostic" },
   ];
 
   return (
@@ -131,7 +132,7 @@ export default function Navbar() {
         <div
           className={cn(
             "md:hidden absolute top-full left-0 right-0 mt-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl transition-all duration-300 overflow-hidden shadow-2xl rounded-3xl border border-white/50 dark:border-gray-700/50",
-            isOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0 border-transparent shadow-none"
+            isOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0 border-transparent shadow-none"
           )}
         >
           <div className="p-4 space-y-2 flex flex-col">
