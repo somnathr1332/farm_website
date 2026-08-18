@@ -1,0 +1,11 @@
+# robots.txt for GreenLeaf Farms
+# https://somnathr1332.github.io/farm_website/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://somnathr1332.github.io/farm_website/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 10
