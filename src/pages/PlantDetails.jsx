@@ -42,16 +42,16 @@ export default function PlantDetails() {
         description={`Buy ${plant.name} (${plant.category}) from GreenLeaf Farms in Sembanarkoil, Mayiladuthurai, Tamil Nadu 609309. ${plant.description.substring(0, 120)}...`}
         canonicalPath={`/plants/${plant.id}`}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <Link to="/plants" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-green dark:text-gray-400 dark:hover:text-primary-green transition-colors mb-8 font-medium">
+        <Link to="/plants" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary-green dark:text-gray-400 dark:hover:text-primary-green transition-colors mb-6 font-medium">
           <ArrowLeft size={20} /> Back to Catalog
         </Link>
 
         <div className="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col lg:flex-row transition-colors duration-300">
           
           {/* Plant Image */}
-          <div className="lg:w-1/2 relative bg-gray-50 dark:bg-gray-800 h-[400px] lg:h-auto transition-colors duration-300">
+          <div className="lg:w-[45%] relative bg-gray-50 dark:bg-gray-800 h-[320px] lg:h-auto min-h-[350px] transition-colors duration-300">
             <img 
               src={plant.image} 
               alt={`${plant.name} plant - Buy online from GreenLeaf Farms Sembanarkoil`} 
@@ -60,14 +60,14 @@ export default function PlantDetails() {
           </div>
 
           {/* Plant Info */}
-          <div className="lg:w-1/2 p-8 lg:p-12">
-            <div className="flex items-center gap-3 mb-3">
+          <div className="lg:w-[55%] p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-2">
               <span className="bg-light-green dark:bg-emerald-900/30 text-primary-green dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-colors duration-300">
                 {plant.category}
               </span>
             </div>
 
-            <h1 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-6 tracking-tight transition-colors duration-300">
+            <h1 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors duration-300">
               {plant.name}
             </h1>
 
