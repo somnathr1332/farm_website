@@ -51,7 +51,7 @@ export default function PlantDetails() {
         <div className="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col lg:flex-row transition-colors duration-300">
           
           {/* Plant Image */}
-          <div className="lg:w-[40%] relative bg-gray-50 dark:bg-gray-800 h-[320px] lg:h-[420px] overflow-hidden transition-colors duration-300">
+          <div className="lg:w-[40%] relative bg-gray-50 dark:bg-gray-800 h-[240px] lg:h-[320px] overflow-hidden transition-colors duration-300">
             <img 
               src={plant.image} 
               alt={`${plant.name} plant - Buy online from GreenLeaf Farms Sembanarkoil`} 
