@@ -6,6 +6,8 @@ export const translations = {
     about: "About Us",
     contact: "Contact",
     guides: "Care Guides",
+    quiz: "Plant Finder",
+    calendar: "Planting Calendar",
 
     // Hero
     heroSubtitle: "EST. 2024 • TAMIL NADU'S FINEST",
@@ -71,6 +73,8 @@ export const translations = {
     about: "எங்களை பற்றி",
     contact: "தொடர்பு கொள்ள",
     guides: "வழிகாட்டிகள்",
+    quiz: "செடி தேர்வு",
+    calendar: "பயிரிடும் காலண்டர்",
 
     // Hero
     heroSubtitle: "EST. 2024 • தமிழ்நாட்டின் சிறந்தது",

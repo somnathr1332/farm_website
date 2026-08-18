@@ -6,6 +6,8 @@ import PlantDetails from "./pages/PlantDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import CareGuides from "./pages/CareGuides";
+import PlantQuiz from "./pages/PlantQuiz";
+import PlantingCalendar from "./pages/PlantingCalendar";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="guides" element={<CareGuides />} />
+        <Route path="quiz" element={<PlantQuiz />} />
+        <Route path="calendar" element={<PlantingCalendar />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
